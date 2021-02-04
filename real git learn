@@ -1,0 +1,56 @@
+1. 3가지 프로그램을 깐다.
+git bash 깐다
+
+vsc 깐다
+
+sourcetree 깐다
+
+회원가입시에 보통 google mail로 할꺼다. 
+아이디 통일 시켜라 그게 편하다.
+
+https://www.youtube.com/watch?v=FXDjmsiv8fI
+
+하면서 회원가입을 한다
+
+2. 원하는 위치에 폴더를 만든다. 
+vsc도 그 폴더를 열어준다
+sourcetree도 그 폴더를 열어준다. 
+
+
+3. 파일을 하나 만들어본다. 
+cat같은거 개 쉽게. 이름 적어주고 끝내라.
+2개 만들어라 mouse랑
+
+4. ctrl+` 하면 vsc 에서 터미널 호출이 가능하다.
+
+    > git init 입력 
+
+    //깃의 관리하에 들어간다. 저장소 생성.
+
+    >git config --global user.name "내이름" 
+    내이름은 이름 (github 회원가입해서 만든거)
+
+    >git config --global user.email "내메일주소"
+    내메일 주소치자 (github 회원가입해서 만든거)
+
+    //이제 파일에 대해서 알게된다. 
+
+이제 소스트리를 통해 본다. 파일이 하나 뜬게 보일꺼다. 확인하고 다음.
+
+
+> git status 친다.
+    빨간게 보인다. 업로드 가능한 파일, 안한파일 등등이다.
+
+> git add -A 친다
+
+> git commit -m "first commit"
+
+> git log
+
+앞에 6자리복사 5f4648 이런거
+
+뭐 안쳐지면 vi editer실행중이다 
+
+> : + q 
+
+> git reset 5f4648 --hard
