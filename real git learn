@@ -82,5 +82,8 @@ sourcetree > history > first commit 오마클 "이 커밋까지 현재 브런치
 
 > git commit -m "add all"
 
+>git checkout master
 
+> git merge branch my-idea
 
+> git log --graph -all --decorate
