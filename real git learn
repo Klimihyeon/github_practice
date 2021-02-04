@@ -54,3 +54,33 @@ cat같은거 개 쉽게. 이름 적어주고 끝내라.
 > : + q 
 
 > git reset 5f4648 --hard
+
+sourcetree > history > first commit 오마클 "이 커밋까지 현재 브런치 초기화" hard 선택
+일단 예 하고 보자.
+햐
+"그 전에 작업한거 다 날라간다 그러면 "
+
+> git log
+
+> git revert
+
+> :wq
+
+
+5. 브랜치 만들기
+
+
+>git branch my-idea
+
+>git branch
+
+> git checkout my-idea
+
+둘리 만들고, 쥐 잡고
+
+> git add -A
+
+> git commit -m "add all"
+
+
+
