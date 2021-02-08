@@ -1,0 +1,103 @@
+package j_collection;
+
+import java.util.ArrayList;
+
+public class Score {
+	
+	public static void main(String[] args) {
+		
+		ArrayList<ArrayList<Integer>> students = new ArrayList<>();
+		ArrayList<Integer> score2 = new ArrayList<>();
+
+		ArrayList<String> name = new ArrayList<>();
+		name.add("홍일동");
+		name.add("홍이동");
+		name.add("홍삼동");
+		name.add("홍사동");
+		name.add("홍오동");
+		name.add("홍육동");
+		name.add("홍칠동");
+		ArrayList<String> subject = new ArrayList<>();
+		subject.add("국어");
+		subject.add("영어");
+		subject.add("수학");
+		subject.add("사회");
+		subject.add("과학");
+		subject.add("Oracle");
+		subject.add("Java");
+		ArrayList<Integer> sums = new ArrayList<>();
+		ArrayList<Double> avgs = new ArrayList<>();
+		ArrayList<Integer> ranks = new ArrayList<>();
+		ArrayList<Integer> subsums = new ArrayList<>();
+		ArrayList<Double> subavgs = new ArrayList<>();
+		
+		for (int i =0; i <name.size(); i++){
+			score2 = new ArrayList<>();
+			for (int j =0; j <subject.size(); j++){
+				int random = (int)(Math.random()*100)+1;
+				score2.add(j,random);
+			}
+			students.add(score2);			
+	}
+	
+		for (int i = 0; i < name.size(); i++) {
+			int sum = 0;
+			double avg = 0;
+			for (int j = 0; j < subject.size(); j++) {
+				sum += students.get(i).get(j);
+			}
+			sums.add(i,sum);
+			avg = (double)(sum / subject.size() * 100) / 100;
+			avgs.add(i,avg);
+
+		}
+
+		for (int i = 0; i < name.size(); i++) {
+			int rank = 1;
+			for (int j = 0; j < name.size(); j++) {
+			if(sums.get(i) < sums.get(j)){
+				rank++;}
+		}ranks.add(i,rank);
+		}
+		
+		System.out.print("\t");
+		for (int i =0; i <subject.size(); i++){
+		System.out.print(subject.get(i)+"\t");
+		}System.out.println("합계" + "\t"+ "평균" + "\t"+"석차");
+		for (int i =0; i <name.size(); i++){
+			System.out.print(name.get(i)+"\t");
+			for (int j =0; j <subject.size(); j++){
+				System.out.print(students.get(i).get(j)+"\t");
+
+		}System.out.print(sums.get(i));
+		System.out.print("\t"+avgs.get(i));
+		System.out.print("\t"+ranks.get(i));
+			System.out.println();
+		}	
+		
+		
+		System.out.print("과목합계\t");
+		for (int i = 0; i < subject.size(); i++) {
+			int sum =0;
+			double avg = 0;
+			for (int j = 0; j < name.size(); j++) {
+				sum += students.get(j).get(i);
+		
+		}	
+			subsums.add(i,sum);
+			avg = (double)(sum / name.size() * 100) / 100;
+			subavgs.add(i,avg);
+			System.out.print(subsums.get(i)+"\t");
+		}
+			System.out.println();
+			System.out.print("과목평균\t");
+			for (int i = 0; i < subject.size(); i++) {
+			System.out.print(subavgs.get(i)+"\t");
+			}
+	
+	
+	
+	
+	
+}
+}
