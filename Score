@@ -95,7 +95,7 @@ public class Score {
 			System.out.print(subavgs.get(i)+"\t");
 			}
 	
-	
+//    new score.
 	
 	
 	
