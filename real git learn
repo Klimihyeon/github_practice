@@ -87,3 +87,6 @@ sourcetree > history > first commit 오마클 "이 커밋까지 현재 브런치
 > git merge branch my-idea
 
 > git log --graph -all --decorate
+
+> have to learn master branch.
+
