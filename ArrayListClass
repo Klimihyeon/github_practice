@@ -1,0 +1,213 @@
+package j_collection;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class ArrayListClass {
+	
+	public static void main(String[] args) {
+		//다수의 데이터를 다루기 위해 만들어놓은 표준 방법.배열은 사용하기 힘들기대문에. 길이지정이라던가, 가변길이라던가.
+		//collection framework
+		//크게 3가지. list , map , set 얘네 셋은 인터페이스다. 
+		//list = 배열과 구조가 가장 유사하다. 인덱스를 사용한다.  
+		//map = 인덱스가 아니라 내가 저자하고 싶은 키로 한다.
+		//set = 중복된 값을 저장 할 수 없다. (잘안써요)
+		
+		/*
+		 * boolean add(Object obj) : 마지막 위치에 객체를 추가 후 성공여부를 반환한다.
+		 * --0번부터 차례대로 저장을 한다. 
+		 * void add(int index, Object obj) : 지정된 위치에 객체를 추가한다.
+		 * --0번부터 5번이 있으면 그 사이는 되는데 7번 8번 저장 안된다. 인덱스번호를 뒤로 민다.
+		 * Object set(int index, Object obj) : 지정된 위치에 객체를 저장 후 기존 객체를 반환한다.
+		 * 수정하는 메서드다. 기존에 가지고 있던 값을 덮어쓰는 것.
+		 * Object get(int index) : 지정된 위치의 객체를 반환한다.
+		 * int size() : 저장된 객체의 수를 반환한다.
+		 * boolean remove(int index) : 지정된 위치의 객체를 제거한다. 제거되면 true. 값이 없으면 제거 안됨.
+		 */
+
+	ArrayList sample = new ArrayList();
+	
+	sample.add("abc");
+	sample.add(100);
+	sample.add(new Scanner(System.in));
+	//어떤 타입의 값이든 넣을 수 있다. 저장할때는 편하다. 근데 읽을때 불편하다.
+	//컬렉션에 타입값을 지정해 주는 것을 제네릭이라고 한다.
+	//제네릭을 지정하지 않으면 넣을때는 편하나 꺼낼때는 타입을 예측하기 어렵다.
+	//따라서 제네릭의 사용이 권장된다. 
+	
+	ArrayList<Integer> list = new ArrayList<>();
+	list.add(10);
+//	list.add("abc"); //integer대신 다른 타입 저장이라 컴파일 에러.
+	list.add(20);
+	System.out.println(list.add(30));
+	System.out.println(list); //컬렉션 애들은 그냥 출력해도 값이 나온다. 
+	
+	list.add(1, 40);//1번 인덱스부터 뒤로 밀고 값을 저장한다.
+	System.out.println(list);
+	
+//	list.add(7,10);
+	Integer before = list.set(2, 50);
+	list.set(2, 50); // 기존 인덱스 값을 덮어 써서 새로운 값을 저장한다. return값이 있다.
+
+	System.out.println("before : "+before);
+	System.out.println("after : "+list.get(2));
+	System.out.println(list);
+	
+	
+	
+	Integer integer = list.get(2);
+	System.out.println(integer);
+	
+	list.size();//for문 돌릴때, length가 아니라 사이즈다. 
+	
+/*	for(int i = 0; i < list.size(); i++){
+		System.out.println(i+" : "+list.get(i));
+		list.remove(i);
+	}
+	System.out.println(list); //for 문 돌리면서 다 지웠는데 다 안지워진다. 지우면 사이즈가 줄어든다. 
+*/	//즉, 10,40,50,30 = 지움(0번),40(0번으로 떙겨짐),50(1번이라 지워짐,원래2번이었음),30(1번으로 떙겨짐), size 줄음.2번 없음, 3번 없음. 
+	//40,30 출력.
+	//따라서 값을 지우고 싶다면 뒤에서부터 지워야 한다. 
+	for(int i = list.size()-1; 0<=i; i--){
+		System.out.println(i+" : "+list.get(i));
+		list.remove(i);
+	}System.out.println(list);
+	
+	
+	//list 에 1부터 100까지 랜덤값을 10개 저장해주세요.
+	
+	for(int i = 0; i < 10; i++){
+		int random = (int)(Math.random()*101);
+		list.add(random); 
+
+	}System.out.println(list);
+	
+	// why? list.add(i) = random  연산자의 왼쪽에는 변수가 와야지 메서드가 오면 안된다. 
+	
+
+	//list에 저장된 값을 합계와 평균을 구해주세요.
+	int[] sum = new int [10];
+	int sums=0;
+	for(int i = 0; i < 10; i++){	
+		sum[i] += list.get(i);
+		sums = sum[i];
+	}
+	System.out.println(sums); //왜 0이라고 안주면 안되나.
+	//지역변수는 사용하려면 무조건 초기화를 해줘야 한다. 
+	
+	
+	int sum1 = 0;
+	double avg= 0;
+	for(int i=0; i < list.size(); i++){
+		sum1 += list.get(i);
+	}
+	avg = (double)sum1/list.size();
+	System.out.println();
+	
+/*	int max = 0;
+	int min = 0;
+	for(int i =0; i < list.size(); i++){
+		for(int j = i+1; j < list.size()-1; j++){
+			if(i < j){
+				list.set(i,list.get(j));
+				list.set(j,list.get(i));				
+				max = list.get(i);
+			}
+			min = list.get(list.size()-1);
+		}
+	}System.out.println(max +","+ min);
+*/	
+int min = list.get(0);
+int max = list.get(0);
+for(int i =0; i < list.size(); i++){
+	if(list.get(i) < min){
+		min = list.get(i);
+	}
+		
+	if(max < list.get(i)){
+		max = list.get(i);
+	}
+}
+System.out.println("min : " + min + " / max : " + max);	
+/*for(int i =0; i < list.size(); i++){
+	for(int j = i+1; j < list.size()-1; j++){
+		if(list.get(j) < list.get(i)){
+			min = (list.get(i));
+			list.set(i,list.get(j));		
+			list.set(j,list.get(i));	
+		}
+		}
+	}System.out.println(list);*/
+
+for(int i =0; i < list.size() -1; i++){
+	int m = i;
+	for(int j = i+1; j < list.size();j++){
+		if(list.get(j)<list.get(m)){
+			m = j;
+		}
+
+	}int temp = list.get(i);
+	list.set(i,  list.get(m));
+	list.set(m, temp);
+	
+}	System.out.println(list);
+//이제부터 어레이리스트다. 배열 안쓴다. 
+
+//2차원
+ArrayList<ArrayList<Integer>> list2 = new ArrayList<>();
+
+list = new ArrayList<>();
+list.add(10);
+list.add(20);
+list.add(30);
+
+list2.add(list);
+list = new ArrayList<>();
+list2.add(list);
+list.add(40);
+list.add(50);
+
+list2.get(0).add(70);
+
+//자리바꾸고싶으면
+/*ArrayList<Integer> tempList = list2.get(0);
+list2.set(0,  list2.get(1));
+list2.set(1,  tempList);
+*/
+
+Collections.sort(list);	//정렬 하고싶으면 이렇게.
+
+
+System.out.println(list2);
+
+for(int i = 0; i < list2.size();i++){
+	ArrayList<Integer> li = list2.get(i);
+	for(int j=0; j<li.size(); j++){
+		System.out.print(li.get(j) + "\t");
+	}
+}System.out.println();
+
+for(int i =0; i < list2.size(); i++){
+	for(int j=0; j<list2.get(i).size(); j++){
+		System.out.println(list2.get(i).get(j));
+	}
+}
+
+
+
+
+
+
+
+	}
+}
+
+
+	
+	
+	
+
+
+
+
