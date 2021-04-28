@@ -1,0 +1,60 @@
+package kr.or.ddit.comment.handler;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import kr.or.ddit.comment.service.CommentServiceImpl;
+import kr.or.ddit.comment.service.ICommentService;
+import kr.or.ddit.comment.vo.CommentVO;
+import kr.or.ddit.common.handler.CommandHandler;
+
+public class UpdateCommentHandler implements CommandHandler {
+
+	@Override
+	public boolean isRedirect(HttpServletRequest req) {
+		if(req.getMethod().equals("GET")) { 
+			return true;
+		}else { 
+			return true;
+		}
+	}
+
+	@Override
+	public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		if(req.getMethod().equals("GET")) {
+			return null;
+
+		} else { 
+			long boardSeq = Long.parseLong(req.getParameter("boardSeq"));
+			String code = req.getParameter("code");
+			
+			CommentVO cv = new CommentVO();
+			cv.setReplySeq(Long.parseLong(req.getParameter("replySeq")));
+			cv.setReplyContent(req.getParameter("replyContent"));
+			cv.setReplyDate(req.getParameter("replyDate"));
+			
+			ICommentService service = CommentServiceImpl.getInstance();
+			service.updateComment(cv);
+			
+			// 세션가져오기
+			String userId = (String) req.getSession().getAttribute("USERID");
+			System.out.println("세션 : " + userId);
+			
+//			String redirectUrl = "";
+//			if("admin2".equals(userId)) {
+//				System.out.println("어드민세션 들어옴");
+//				redirectUrl = req.getContextPath() + "/qnaBoard/select.do?boardSeq=" + boardSeq;
+//			} else {
+//				redirectUrl = req.getContextPath() + "/qnaBoard/select.do?boardSeq=" + boardSeq;
+//				System.out.println("유저세션들어옴");
+//			}
+			
+//			String redirectUrl = req.getContextPath() + "/" + code + "/select.do?boardSeq=" + boardSeq;
+			
+			String redirectUrl = req.getContextPath() + "/commBoard/select.do?boardSeq=" + boardSeq;
+			
+			return redirectUrl;
+		}
+	}	
+
+}
